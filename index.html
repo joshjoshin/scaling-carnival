@@ -610,6 +610,79 @@
     }
     .return-link:hover { color: var(--text); }
 
+    /* ─── BLUEPRINT MODAL ────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      position: relative;
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(16px);
+      transition: transform 0.35s ease;
+    }
+    .modal-overlay.open .modal-box {
+      transform: translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .modal-title {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-body {
+      overflow: auto;
+      padding: 1.5rem;
+      flex: 1;
+    }
+    .modal-body img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: invert(1) sepia(0.15) hue-rotate(320deg);
+      opacity: 0.88;
+    }
+
     /* ─── REVEAL ─────────────────────────────────── */
     .r { opacity: 0; transform: translateY(22px); }
 
@@ -808,7 +881,7 @@
           <div class="alert-label">Genesis 15:18</div>
           <div class="alert-text">"To your descendants I have given this land, from the river of Egypt to the great river, the Euphrates — the land of the Kenites, Kenizzites, Kadmonites…"</div>
         </div>
-        <a href="#" class="btn-red r">View Covenant Map</a>
+        <button class="btn-red r" id="openCovenantMap">View Covenant Map</button>
       </div>
     </div>
   </section>
@@ -854,7 +927,7 @@
         Beit HaMikdash // Temple Mount, Jerusalem<br>
         Awaiting Purification // The Ashes Are Not Yet Prepared
       </div>
-      <a href="#" class="btn-ghost r">View Blueprints</a>
+      <button class="btn-ghost r" id="openBlueprint">View Blueprints</button>
     </div>
   </section>
 
@@ -888,6 +961,32 @@
       </div>
     </div>
   </section>
+
+  <!-- ─── COVENANT MAP MODAL ──────────────────────── -->
+  <div class="modal-overlay" id="covenantModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">Genesis 15:18 — The Covenant Land</span>
+        <button class="modal-close" data-close="covenantModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <img src="greater.webp" alt="Map of the Covenant borders of Greater Israel">
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── BLUEPRINT MODAL ──────────────────────────── -->
+  <div class="modal-overlay" id="blueprintModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">Beit HaMikdash — Third Temple Blueprint</span>
+        <button class="modal-close" data-close="blueprintModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <img src="blueprint.svg" alt="Third Temple architectural blueprint">
+      </div>
+    </div>
+  </div>
 
   <!-- GSAP via CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -979,6 +1078,25 @@
         if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
+
+    /* ── MODALS ── */
+    function closeAllModals() {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    }
+
+    document.getElementById('openCovenantMap').addEventListener('click', () =>
+      document.getElementById('covenantModal').classList.add('open'));
+
+    document.getElementById('openBlueprint').addEventListener('click', () =>
+      document.getElementById('blueprintModal').classList.add('open'));
+
+    document.querySelectorAll('.modal-close').forEach(btn =>
+      btn.addEventListener('click', closeAllModals));
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay =>
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeAllModals(); }));
+
+    window.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
 
     /* ── SCROLL SNAP ── */
     const snapSections = [...document.querySelectorAll('section[data-stage]')];
