@@ -335,15 +335,20 @@
       will-change: transform;
     }
 
-    /* Starburst SVG */
+    /* Covenant map image */
     .init-burst {
       position: absolute;
-      right: 3%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48vw; height: 48vw;
-      opacity: 0.12;
+      right: 0;
+      top: 0;
+      width: 55vw;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.72;
+      filter: invert(1) sepia(0.15) hue-rotate(320deg);
       will-change: transform;
+      mask-image: linear-gradient(to right, transparent 0%, black 30%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
     }
 
     .init-inner {
@@ -716,7 +721,7 @@
       .init-inner { padding: 0 1.5rem; }
       .init-left  { width: 100%; padding-right: 0; }
       .init-title { font-size: clamp(3rem, 12vw, 5rem); }
-      .init-burst { width: 70vw; height: 70vw; right: -15%; opacity: 0.07; }
+      .init-burst { width: 100%; opacity: 0.15; mask-image: linear-gradient(to top, transparent 0%, black 40%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 40%); }
 
       /* Section 3 */
       .decay-inner { padding: 0 1.5rem; justify-content: flex-start; }
@@ -808,72 +813,7 @@
   <section id="greater-israel" data-stage="greater-israel">
     <div class="init-bg" id="initBg"></div>
 
-    <!-- Starburst -->
-    <svg class="init-burst" id="initBurst" viewBox="0 0 400 400" fill="none" aria-hidden="true">
-      <defs>
-        <radialGradient id="burstGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stop-color="white" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <g transform="translate(200,200)" stroke="white">
-        <!-- 60 radial lines generated around 360° -->
-        <line x1="0" y1="0" x2="0"    y2="-195" stroke-width="0.4"/>
-        <line x1="0" y1="0" x2="20"   y2="-194" stroke-width="0.25"/>
-        <line x1="0" y1="0" x2="40"   y2="-190" stroke-width="0.35"/>
-        <line x1="0" y1="0" x2="60"   y2="-183" stroke-width="0.2"/>
-        <line x1="0" y1="0" x2="78"   y2="-173" stroke-width="0.45"/>
-        <line x1="0" y1="0" x2="96"   y2="-160" stroke-width="0.28"/>
-        <line x1="0" y1="0" x2="113"  y2="-145" stroke-width="0.38"/>
-        <line x1="0" y1="0" x2="128"  y2="-128" stroke-width="0.22"/>
-        <line x1="0" y1="0" x2="145"  y2="-110" stroke-width="0.48"/>
-        <line x1="0" y1="0" x2="160"  y2="-90"  stroke-width="0.3"/>
-        <line x1="0" y1="0" x2="173"  y2="-68"  stroke-width="0.4"/>
-        <line x1="0" y1="0" x2="183"  y2="-44"  stroke-width="0.2"/>
-        <line x1="0" y1="0" x2="190"  y2="-20"  stroke-width="0.45"/>
-        <line x1="0" y1="0" x2="195"  y2="0"    stroke-width="0.3"/>
-        <line x1="0" y1="0" x2="190"  y2="20"   stroke-width="0.35"/>
-        <line x1="0" y1="0" x2="183"  y2="44"   stroke-width="0.22"/>
-        <line x1="0" y1="0" x2="173"  y2="68"   stroke-width="0.48"/>
-        <line x1="0" y1="0" x2="160"  y2="90"   stroke-width="0.28"/>
-        <line x1="0" y1="0" x2="145"  y2="110"  stroke-width="0.38"/>
-        <line x1="0" y1="0" x2="128"  y2="128"  stroke-width="0.2"/>
-        <line x1="0" y1="0" x2="113"  y2="145"  stroke-width="0.45"/>
-        <line x1="0" y1="0" x2="96"   y2="160"  stroke-width="0.3"/>
-        <line x1="0" y1="0" x2="78"   y2="173"  stroke-width="0.4"/>
-        <line x1="0" y1="0" x2="60"   y2="183"  stroke-width="0.22"/>
-        <line x1="0" y1="0" x2="40"   y2="190"  stroke-width="0.48"/>
-        <line x1="0" y1="0" x2="20"   y2="194"  stroke-width="0.28"/>
-        <line x1="0" y1="0" x2="0"    y2="195"  stroke-width="0.38"/>
-        <line x1="0" y1="0" x2="-20"  y2="194"  stroke-width="0.2"/>
-        <line x1="0" y1="0" x2="-40"  y2="190"  stroke-width="0.45"/>
-        <line x1="0" y1="0" x2="-60"  y2="183"  stroke-width="0.3"/>
-        <line x1="0" y1="0" x2="-78"  y2="173"  stroke-width="0.4"/>
-        <line x1="0" y1="0" x2="-96"  y2="160"  stroke-width="0.22"/>
-        <line x1="0" y1="0" x2="-113" y2="145"  stroke-width="0.48"/>
-        <line x1="0" y1="0" x2="-128" y2="128"  stroke-width="0.28"/>
-        <line x1="0" y1="0" x2="-145" y2="110"  stroke-width="0.38"/>
-        <line x1="0" y1="0" x2="-160" y2="90"   stroke-width="0.2"/>
-        <line x1="0" y1="0" x2="-173" y2="68"   stroke-width="0.45"/>
-        <line x1="0" y1="0" x2="-183" y2="44"   stroke-width="0.3"/>
-        <line x1="0" y1="0" x2="-190" y2="20"   stroke-width="0.35"/>
-        <line x1="0" y1="0" x2="-195" y2="0"    stroke-width="0.22"/>
-        <line x1="0" y1="0" x2="-190" y2="-20"  stroke-width="0.48"/>
-        <line x1="0" y1="0" x2="-183" y2="-44"  stroke-width="0.28"/>
-        <line x1="0" y1="0" x2="-173" y2="-68"  stroke-width="0.38"/>
-        <line x1="0" y1="0" x2="-160" y2="-90"  stroke-width="0.2"/>
-        <line x1="0" y1="0" x2="-145" y2="-110" stroke-width="0.45"/>
-        <line x1="0" y1="0" x2="-128" y2="-128" stroke-width="0.3"/>
-        <line x1="0" y1="0" x2="-113" y2="-145" stroke-width="0.4"/>
-        <line x1="0" y1="0" x2="-96"  y2="-160" stroke-width="0.22"/>
-        <line x1="0" y1="0" x2="-78"  y2="-173" stroke-width="0.48"/>
-        <line x1="0" y1="0" x2="-60"  y2="-183" stroke-width="0.28"/>
-        <line x1="0" y1="0" x2="-40"  y2="-190" stroke-width="0.38"/>
-        <line x1="0" y1="0" x2="-20"  y2="-194" stroke-width="0.2"/>
-      </g>
-      <circle cx="200" cy="200" r="22" fill="rgba(255,220,140,0.25)"/>
-      <circle cx="200" cy="200" r="8"  fill="rgba(255,255,200,0.55)"/>
-    </svg>
+    <img class="init-burst" id="initBurst" src="greater.webp" alt="Covenant map of Greater Israel">
 
     <div class="init-inner">
       <div class="init-left">
@@ -888,7 +828,6 @@
           <div class="alert-label">Genesis 15:18</div>
           <div class="alert-text">"To your descendants I have given this land, from the river of Egypt to the great river, the Euphrates — the land of the Kenites, Kenizzites, Kadmonites…"</div>
         </div>
-        <button class="btn-red r" id="openCovenantMap">View Covenant Map</button>
       </div>
     </div>
   </section>
@@ -968,19 +907,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ─── COVENANT MAP MODAL ──────────────────────── -->
-  <div class="modal-overlay" id="covenantModal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <span class="modal-title">Genesis 15:18 — The Covenant Land</span>
-        <button class="modal-close" data-close="covenantModal" aria-label="Close">✕</button>
-      </div>
-      <div class="modal-body">
-        <img src="greater.webp" alt="Map of the Covenant borders of Greater Israel">
-      </div>
-    </div>
-  </div>
 
   <!-- ─── BLUEPRINT MODAL ──────────────────────────── -->
   <div class="modal-overlay" id="blueprintModal">
@@ -1090,9 +1016,6 @@
     function closeAllModals() {
       document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
     }
-
-    document.getElementById('openCovenantMap').addEventListener('click', () =>
-      document.getElementById('covenantModal').classList.add('open'));
 
     document.getElementById('openBlueprint').addEventListener('click', () =>
       document.getElementById('blueprintModal').classList.add('open'));
