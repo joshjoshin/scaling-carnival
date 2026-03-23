@@ -969,6 +969,12 @@
       }
     });
 
+    /* keyboard arrows */
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); snapTo(snapIndex + 1); }
+      if (e.key === 'ArrowUp')   { e.preventDefault(); snapTo(snapIndex - 1); }
+    });
+
     /* wheel */
     window.addEventListener('wheel', e => {
       e.preventDefault();
