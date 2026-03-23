@@ -206,11 +206,18 @@
 
     .pc-bg {
       position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 90% 70% at 65% 35%, rgba(28,40,18,0.85) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 90% at 15% 85%, rgba(12,22,8,0.6) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 80% 70%, rgba(8,20,5,0.4) 0%, transparent 50%);
+      background-image: url('balfour-optimized.png');
+      background-size: cover;
+      background-position: center;
       will-change: transform;
+    }
+
+    .pc-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, transparent 30%, rgba(8,8,8,0.92) 68%),
+        linear-gradient(to right, rgba(8,8,8,0.88) 25%, transparent 62%);
     }
 
     .pc-inner {
