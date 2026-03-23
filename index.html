@@ -172,6 +172,7 @@
     section {
       position: relative;
       min-height: 100vh;
+      min-height: 100dvh; /* mobile dynamic viewport */
       overflow: hidden;
     }
 
@@ -216,6 +217,7 @@
       position: relative; z-index: 2;
       padding: calc(var(--nav-h) + 3.5rem) 5.5rem 5rem;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -226,7 +228,7 @@
     }
 
     .pc-title {
-      font-size: clamp(7rem, 17.5vw, 19rem);
+      font-size: clamp(4rem, 11vw, 13rem);
       margin-bottom: 3.5rem;
     }
 
@@ -610,6 +612,61 @@
 
     /* ─── REVEAL ─────────────────────────────────── */
     .r { opacity: 0; transform: translateY(22px); }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Nav: hide links, side dots handle navigation */
+      .nav-links { display: none; }
+      nav { padding: 0 1.5rem; }
+
+      /* Side dots: nudge closer to edge */
+      .stage-dots { right: 0.75rem; }
+
+      /* Section 1 */
+      .pc-inner {
+        padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem;
+      }
+      .pc-title { font-size: clamp(3.5rem, 14vw, 6rem); }
+      .pc-bottom {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      /* Section 2 */
+      .init-inner { padding: 0 1.5rem; }
+      .init-left  { width: 100%; padding-right: 0; }
+      .init-title { font-size: clamp(3rem, 12vw, 5rem); }
+      .init-burst { width: 70vw; height: 70vw; right: -15%; opacity: 0.07; }
+
+      /* Section 3 */
+      .decay-inner { padding: 0 1.5rem; justify-content: flex-start; }
+      .decay-right { width: 100%; }
+      .decay-title { font-size: clamp(3.5rem, 13vw, 6rem); text-align: left; }
+      .decay-text  { text-align: left; }
+      .stats-row   { justify-content: flex-start; gap: 2rem; }
+
+      /* Section 4 */
+      .void-inner { padding: 0 1.5rem; }
+      .void-title { font-size: clamp(4rem, 15vw, 7rem); }
+      .void-sub   { letter-spacing: 0.18em; font-size: 0.5rem; }
+
+      /* Section 5 */
+      .reck-inner { padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem; }
+      .reck-title { font-size: clamp(3rem, 13vw, 6rem); }
+      .reck-grid  { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .reck-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .coords { font-size: 0.46rem; }
+    }
+
+    @media (max-width: 480px) {
+      .pc-title   { font-size: clamp(3rem, 13vw, 5rem); }
+      .reck-grid  { grid-template-columns: 1fr; }
+      .void-title { font-size: clamp(3.5rem, 14vw, 6rem); }
+    }
   </style>
 </head>
 <body>
