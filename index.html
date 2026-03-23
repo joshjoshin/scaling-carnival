@@ -408,10 +408,17 @@
 
     .decay-bg {
       position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 75% 75% at 25% 50%, rgba(14,14,16,0.95) 0%, transparent 70%),
-        linear-gradient(105deg, rgba(8,8,8,0.8) 0%, transparent 55%);
+      background-image: url('red-heifer-optimized.png');
+      background-size: cover;
+      background-position: center;
       will-change: transform;
+    }
+
+    .decay-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to left, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.75) 40%, transparent 70%);
     }
 
     .decay-grid {
