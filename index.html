@@ -21,7 +21,7 @@
       --nav-h:      56px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
 
     body {
       background: #080808;
@@ -940,6 +940,60 @@
         if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
+
+    /* ── SCROLL SNAP ── */
+    const snapSections = [...document.querySelectorAll('section[data-stage]')];
+    let snapIndex    = 0;
+    let snapping     = false;
+    let accumulated  = 0;
+    const THRESHOLD  = () => window.innerHeight / 5;
+
+    function snapTo(index) {
+      const next = Math.min(Math.max(index, 0), snapSections.length - 1);
+      if (next === snapIndex && snapping) return;
+      snapIndex = next;
+      snapping  = true;
+      accumulated = 0;
+      snapSections[snapIndex].scrollIntoView({ behavior: 'smooth' });
+      // release lock once scroll settles
+      setTimeout(() => { snapping = false; }, 900);
+    }
+
+    /* keep snapIndex in sync when user lands mid-page (e.g. nav link click) */
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      onUpdate: self => {
+        if (snapping) return;
+        const mid = window.scrollY + window.innerHeight * 0.5;
+        snapSections.forEach((sec, i) => {
+          if (sec.offsetTop <= mid) snapIndex = i;
+        });
+      }
+    });
+
+    /* wheel */
+    window.addEventListener('wheel', e => {
+      e.preventDefault();
+      if (snapping) return;
+      accumulated += e.deltaY;
+      if (Math.abs(accumulated) >= THRESHOLD()) {
+        snapTo(snapIndex + (accumulated > 0 ? 1 : -1));
+      }
+    }, { passive: false });
+
+    /* touch */
+    let touchStartY = 0;
+    window.addEventListener('touchstart', e => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    window.addEventListener('touchend', e => {
+      if (snapping) return;
+      const delta = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(delta) >= THRESHOLD()) {
+        snapTo(snapIndex + (delta > 0 ? 1 : -1));
+      }
+    }, { passive: true });
   </script>
 </body>
 </html>
