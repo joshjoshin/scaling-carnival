@@ -706,58 +706,74 @@
     .r { opacity: 0; transform: translateY(22px); }
 
     /* ─── RESPONSIVE ─────────────────────────────── */
+    /* ── Tablet / large phone (≤768px) ── */
     @media (max-width: 768px) {
-      /* Nav: hide links, side dots handle navigation */
       .nav-links { display: none; }
       nav { padding: 0 1.5rem; }
-
-      /* Side dots: nudge closer to edge */
       .stage-dots { right: 0.75rem; }
 
-      /* Section 1 */
-      .pc-inner {
-        padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem;
-      }
+      /* S1 — Ingathering: darken gradient more aggressively so Balfour image doesn't overwhelm */
+      .pc-inner { padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem; }
       .pc-title { font-size: clamp(3.5rem, 14vw, 6rem); }
-      .pc-bottom {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+      .pc-bottom { grid-template-columns: 1fr; gap: 2rem; }
+      .pc-bg::after {
+        background:
+          linear-gradient(to bottom, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.96) 55%),
+          linear-gradient(to right, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.4) 100%);
       }
 
-      /* Section 2 */
-      .init-inner { padding: 0 1.5rem; }
+      /* S2 — Greater Israel: fade map to subtle background texture */
+      .init-inner { padding: 0 1.5rem; min-height: 100dvh; align-items: center; }
       .init-left  { width: 100%; padding-right: 0; }
       .init-title { font-size: clamp(3rem, 12vw, 5rem); }
-      .init-burst { width: 100%; opacity: 0.15; mask-image: linear-gradient(to top, transparent 0%, black 40%); -webkit-mask-image: linear-gradient(to top, transparent 0%, black 40%); }
+      .init-burst {
+        width: 100%; height: 100%;
+        opacity: 0.1;
+        mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+      }
 
-      /* Section 3 */
-      .decay-inner { padding: 0 1.5rem; justify-content: flex-start; }
+      /* S3 — Red Heifer: swap to bottom gradient so image shows at top */
+      .decay-inner { padding: 0 1.5rem; justify-content: flex-end; padding-bottom: 3rem; }
       .decay-right { width: 100%; }
       .decay-title { font-size: clamp(3.5rem, 13vw, 6rem); text-align: left; }
       .decay-text  { text-align: left; }
       .stats-row   { justify-content: flex-start; gap: 2rem; }
+      .decay-bg::after {
+        background: linear-gradient(to top, rgba(8,8,8,0.97) 40%, rgba(8,8,8,0.3) 80%, transparent 100%);
+      }
 
-      /* Section 4 */
+      /* S4 — Third Temple */
       .void-inner { padding: 0 1.5rem; }
       .void-title { font-size: clamp(4rem, 15vw, 7rem); }
       .void-sub   { letter-spacing: 0.18em; font-size: 0.5rem; }
 
-      /* Section 5 */
+      /* S5 — Gog & Magog */
       .reck-inner { padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem; }
       .reck-title { font-size: clamp(3rem, 13vw, 6rem); }
       .reck-grid  { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-      .reck-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
+      .reck-footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .coords { font-size: 0.46rem; }
     }
 
-    @media (max-width: 480px) {
-      .pc-title   { font-size: clamp(3rem, 13vw, 5rem); }
+    /* ── iPhone 14 Pro / standard (≤430px) ── */
+    @media (max-width: 430px) {
+      .pc-title   { font-size: clamp(3rem, 13.5vw, 5rem); }
+      .init-title { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+      .decay-title { font-size: clamp(3rem, 13vw, 5rem); }
+      .void-title { font-size: clamp(3.8rem, 15vw, 6rem); }
+      .reck-title { font-size: clamp(2.8rem, 13vw, 5rem); }
+      .reck-grid  { grid-template-columns: 1fr 1fr; }
+      .stage-text { font-size: 0.75rem; }
+    }
+
+    /* ── iPhone SE / small (≤375px) ── */
+    @media (max-width: 375px) {
+      .pc-title   { font-size: clamp(2.8rem, 13vw, 4.5rem); }
+      .void-title { font-size: clamp(3.5rem, 14vw, 5.5rem); }
       .reck-grid  { grid-template-columns: 1fr; }
-      .void-title { font-size: clamp(3.5rem, 14vw, 6rem); }
+      .alert-text { font-size: 0.65rem; }
+      .reck-stat  { font-size: 1.2rem; }
     }
   </style>
 </head>
