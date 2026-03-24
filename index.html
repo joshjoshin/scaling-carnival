@@ -1110,13 +1110,14 @@
     window.addEventListener('touchstart', e => {
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
-    window.addEventListener('touchend', e => {
+    window.addEventListener('touchmove', e => {
+      e.preventDefault();
       if (snapping) return;
-      const delta = touchStartY - e.changedTouches[0].clientY;
+      const delta = touchStartY - e.touches[0].clientY;
       if (Math.abs(delta) >= THRESHOLD()) {
         snapTo(snapIndex + (delta > 0 ? 1 : -1));
       }
-    }, { passive: true });
+    }, { passive: false });
   </script>
 </body>
 </html>
